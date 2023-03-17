@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://7tawpphxve32"]
+
+[ext_resource type="PackedScene" uid="uid://b2l50ily7ghwc" path="res://src/main/scenes/TitleScreen.tscn" id="2_8bwrj"]
+
+[node name="App" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 250
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 250
+theme_override_constants/margin_bottom = 50
+
+[node name="Title Screen" parent="." instance=ExtResource("2_8bwrj")]
+layout_mode = 2
