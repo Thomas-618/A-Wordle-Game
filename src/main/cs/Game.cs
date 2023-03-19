@@ -22,7 +22,7 @@ public partial class Game : Node
 		this.Answer = SelectWord();
 		this.GameGrid = (Grid) GetNode("Grid");
 		this.PopupReel = (Reel) GetNode("Reel");
-		GameGrid._Init(this, this.WordLength, 6);
+		GameGrid.Init(this.WordLength, 6.0f);
 	}
 
 	public string SelectWord() 

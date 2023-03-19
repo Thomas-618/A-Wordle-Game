@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cgqbppvkpfosa"]
+[gd_scene load_steps=6 format=3 uid="uid://jkf0o8x40lgf"]
 
-[ext_resource type="Script" path="res://src/main/c-sharp/LevelSelector.cs" id="1_5lwni"]
 [ext_resource type="FontFile" uid="uid://bn0r5u2fxfvxn" path="res://src/main/resources/LibreFranklinBold.ttf" id="1_gr0t0"]
+[ext_resource type="Script" path="res://src/main/cs/LevelSelector.cs" id="1_qpcp6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x57pl"]
 bg_color = Color(0.227451, 0.227451, 0.235294, 1)
@@ -20,7 +20,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 16
 alignment = 1
-script = ExtResource("1_5lwni")
+script = ExtResource("1_qpcp6")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
@@ -251,9 +251,9 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_oexhm")
 toggle_mode = true
 text = "LEVEL 16"
 
-[connection signal="pressed" from="HBoxContainer/Button" to="." method="_on_button_pressed" binds= [1]]
+[connection signal="pressed" from="HBoxContainer/Button" to="." method="_OnButtonPressed" binds= [1]]
 [connection signal="pressed" from="HBoxContainer/Button2" to="." method="_OnButtonPressed" binds= [2]]
-[connection signal="pressed" from="HBoxContainer/Button3" to="." method="__OnButtonPressed" binds= [3]]
+[connection signal="pressed" from="HBoxContainer/Button3" to="." method="_OnButtonPressed" binds= [3]]
 [connection signal="pressed" from="HBoxContainer/Button4" to="." method="_OnButtonPressed" binds= [4]]
 [connection signal="pressed" from="HBoxContainer2/Button" to="." method="_OnButtonPressed" binds= [5]]
 [connection signal="pressed" from="HBoxContainer2/Button2" to="." method="_OnButtonPressed" binds= [6]]

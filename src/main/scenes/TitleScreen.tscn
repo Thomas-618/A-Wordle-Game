@@ -1,6 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://b2l50ily7ghwc"]
+[gd_scene load_steps=6 format=3 uid="uid://cvifolvnp884x"]
 
-[ext_resource type="Script" path="res://src/main/c-sharp/TitleScreen.cs" id="1_2uy6c"]
+[ext_resource type="Script" path="res://src/main/cs/TitleScreen.cs" id="1_67kwi"]
 [ext_resource type="FontFile" uid="uid://bn0r5u2fxfvxn" path="res://src/main/resources/LibreFranklinBold.ttf" id="2_aer5r"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x57pl"]
@@ -20,7 +20,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 80
 alignment = 1
-script = ExtResource("1_2uy6c")
+script = ExtResource("1_67kwi")
 
 [node name="Title" type="LineEdit" parent="."]
 layout_mode = 2

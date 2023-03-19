@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cax4onb4xlb3i"]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="Theme" path="res://src/main/resources/themes/Popup.tres" id="1_4iw3u"]
-[ext_resource type="Script" path="res://src/main/c-sharp/gui/Popup.cs" id="2_rn3wl"]
+[ext_resource type="Script" path="res://src/main/cs/gui/Popup.cs" id="2_rn3wl"]
 
 [sub_resource type="Animation" id="Animation_sqhpb"]
 resource_name = "FadePopup"

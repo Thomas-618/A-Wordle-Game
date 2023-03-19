@@ -1,5 +1,4 @@
 using Godot;
-using Godot.Collections;
 using System;
 
 public partial class Guess : Node
@@ -8,7 +7,7 @@ public partial class Guess : Node
 	private readonly Game GameGame;
 	private readonly string GuessedWord;
 	private readonly Result GuessResult;
-	private readonly Array<Accuracy> GuessAccuracy;
+	private readonly Accuracy[] GuessAccuracy;
 
 	public enum Result {Match, Valid, Invalid}
 	public enum Accuracy {Correct, SemiCorrect, Incorrect}
@@ -39,13 +38,10 @@ public partial class Guess : Node
 		return Result.Invalid;
 	}
 
-	private Array<Accuracy> CheckGuessAccuracy() 
+	private Accuracy[] CheckGuessAccuracy() 
 	{
-		Array<Accuracy> answerAccuracy = new Array<Accuracy>();
-		Array<Accuracy> guessAccuracy = new Array<Accuracy>();
-		answerAccuracy.Resize(GameGame.GetAnswer().Length);
-		guessAccuracy.Resize(GameGame.GetAnswer().Length);
-
+		Accuracy[] answerAccuracy = new Accuracy[GameGame.GetAnswer().Length];
+		Accuracy[] guessAccuracy = new Accuracy[GameGame.GetAnswer().Length];
 		for (int i = 0; i < GameGame.GetAnswer().Length; i++)
 		{
 			if (GuessedWord[i] == GameGame.GetAnswer()[i])
@@ -83,7 +79,7 @@ public partial class Guess : Node
 		return this.GuessResult;
 	}
 
-	public Array<Accuracy> GetGuessAccuracy()
+	public Accuracy[] GetGuessAccuracy()
 	{
 		if (this.GuessResult == Result.Invalid) {
 			throw new InvalidOperationException(

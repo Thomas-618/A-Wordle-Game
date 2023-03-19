@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://o3wfagbtgeso"]
+[gd_scene load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://src/main/c-sharp/gui/Reel.cs" id="1_rf5a3"]
+[ext_resource type="Script" path="res://src/main/cs/gui/Reel.cs" id="1_rf5a3"]
 
 [node name="Reel" type="VBoxContainer"]
 anchors_preset = 5

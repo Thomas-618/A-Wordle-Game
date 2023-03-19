@@ -13,7 +13,11 @@ config_version=5
 config/name="Wordle"
 run/main_scene="res://src/main/scenes/App.tscn"
 config/features=PackedStringArray("4.0", "C#", "Forward Plus")
-config/icon="res://icon.svg"
+boot_splash/bg_color=Color(0.0705882, 0.0705882, 0.0705882, 1)
+boot_splash/show_image=false
+boot_splash/image="res://Wordle Logo.png"
+boot_splash/fullsize=false
+config/icon="res://Wordle Logo.svg"
 
 [display]
 
