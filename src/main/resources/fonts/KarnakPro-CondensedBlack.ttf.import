@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://bn0r5u2fxfvxn"
-path="res://.godot/imported/LibreFranklinBold.ttf-4860d1bc9c48948c17b8665ab4b58a3f.fontdata"
+uid="uid://dr1j2r8o1j6yl"
+path="res://.godot/imported/KarnakPro-CondensedBlack.ttf-160891908a31affb1e0b6ac764519476.fontdata"
 
 [deps]
 
-source_file="res://src/main/resources/LibreFranklinBold.ttf"
-dest_files=["res://.godot/imported/LibreFranklinBold.ttf-4860d1bc9c48948c17b8665ab4b58a3f.fontdata"]
+source_file="res://src/main/resources/fonts/KarnakPro-CondensedBlack.ttf"
+dest_files=["res://.godot/imported/KarnakPro-CondensedBlack.ttf-160891908a31affb1e0b6ac764519476.fontdata"]
 
 [params]
 

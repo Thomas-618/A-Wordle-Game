@@ -2,9 +2,8 @@ using Godot;
 using System;
 using WordleUI;
 
-public partial class Grid : GridContainer, BaseWordleUI
+public partial class Grid : GridContainer, IWordleUI
 {
-
     private Vector2 GridDimensions;
     private Row[] GridRows;
     public bool Used;
@@ -38,7 +37,6 @@ public partial class Grid : GridContainer, BaseWordleUI
             }
         }
         this._OnFocusEntered();
-
     }
 
     public void DisplayAccuracy(Guess.Accuracy[] accuracy, double duration = 0.0)
@@ -60,10 +58,10 @@ public partial class Grid : GridContainer, BaseWordleUI
         this._OnFocusEntered();
     }
 
-    public void _OnTextChanged(string text) {
-		throw new InvalidOperationException(
-			"error: attempted to call text changed on grid");
-	 }
+    public void _OnTextChanged(string text)
+    {
+        throw new InvalidOperationException("error: attempted to call text changed on grid");
+    }
 
     public void _OnFocusEntered()
     {

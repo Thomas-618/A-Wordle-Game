@@ -2,9 +2,8 @@ using Godot;
 using System;
 using WordleUI;
 
-public partial class Cell : LineEdit, BaseWordleUI
+public partial class Cell : LineEdit, IWordleUI
 {
-
     private Vector2 CellDimensions;
     private bool Used;
 
@@ -24,14 +23,10 @@ public partial class Cell : LineEdit, BaseWordleUI
         void BounceCell()
         {
             Tween tween = GetTree().CreateTween();
-            tween.TweenProperty(this, "position",
-                        new Vector2(this.Position.X, -48.0f), 0.20);
-            tween.TweenProperty(this, "position",
-                new Vector2(this.Position.X, 0.0f), 0.20);
-            tween.TweenProperty(this, "position",
-                new Vector2(this.Position.X, -32.0f), 0.20);
-            tween.TweenProperty(this, "position",
-                new Vector2(this.Position.X, 0.0f), 0.20);
+            tween.TweenProperty(this, "position", new Vector2(this.Position.X, -48.0f), 0.20);
+            tween.TweenProperty(this, "position", new Vector2(this.Position.X, 0.0f), 0.20);
+            tween.TweenProperty(this, "position", new Vector2(this.Position.X, -32.0f), 0.20);
+            tween.TweenProperty(this, "position", new Vector2(this.Position.X, 0.0f), 0.20);
         }
 
         switch (result)
@@ -41,10 +36,12 @@ public partial class Cell : LineEdit, BaseWordleUI
                 break;
             case Guess.Result.Valid:
                 throw new InvalidOperationException(
-                    "error: cell attempted to display Guess.Result.Valid");
+                    "error: cell attempted to display Guess.Result.Valid"
+                );
             case Guess.Result.Invalid:
                 throw new InvalidOperationException(
-                    "error: cell attempted to display Guess.Result.Invalid");
+                    "error: cell attempted to display Guess.Result.Invalid"
+                );
         }
     }
 
@@ -54,8 +51,9 @@ public partial class Cell : LineEdit, BaseWordleUI
         {
             Tween tween = GetTree().CreateTween();
             tween.TweenProperty(this, "scale", new Vector2(1.0f, 0.0f), duration);
-            tween.Parallel().TweenProperty(this,
-                    "theme_override_styles/read_only", style, duration);
+            tween
+                .Parallel()
+                .TweenProperty(this, "theme_override_styles/read_only", style, duration);
             tween.TweenProperty(this, "scale", new Vector2(1.0f, 1.0f), duration);
         }
 

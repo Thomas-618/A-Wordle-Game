@@ -2,9 +2,8 @@ using Godot;
 using System;
 using WordleUI;
 
-public partial class Row : HBoxContainer, BaseWordleUI
+public partial class Row : HBoxContainer, IWordleUI
 {
-
     private Vector2 RowDimensions;
     private Cell[] RowCells;
     private bool Used;
@@ -44,14 +43,10 @@ public partial class Row : HBoxContainer, BaseWordleUI
             Tween tween = GetTree().CreateTween();
             for (int i = 0; i < 3; i++)
             {
-                tween.TweenProperty(this, "position",
-                    new Vector2(8.0f, this.Position.Y), 0.025);
-                tween.TweenProperty(this, "position",
-                    new Vector2(0.0f, this.Position.Y), 0.025);
-                tween.TweenProperty(this, "position",
-                    new Vector2(-8.0f, this.Position.Y), 0.025);
-                tween.TweenProperty(this, "position",
-                    new Vector2(0.0f, this.Position.Y), 0.025);
+                tween.TweenProperty(this, "position", new Vector2(8.0f, this.Position.Y), 0.025);
+                tween.TweenProperty(this, "position", new Vector2(0.0f, this.Position.Y), 0.025);
+                tween.TweenProperty(this, "position", new Vector2(-8.0f, this.Position.Y), 0.025);
+                tween.TweenProperty(this, "position", new Vector2(0.0f, this.Position.Y), 0.025);
             }
         }
 
@@ -62,7 +57,8 @@ public partial class Row : HBoxContainer, BaseWordleUI
                 break;
             case Guess.Result.Valid:
                 throw new InvalidOperationException(
-                    "error: row attempted to display Guess.Result.Valid");
+                    "error: row attempted to display Guess.Result.Valid"
+                );
             case Guess.Result.Invalid:
                 ShakeRow();
                 break;
@@ -76,10 +72,11 @@ public partial class Row : HBoxContainer, BaseWordleUI
             double percentDecay = 1.0;
             for (int i = 0; i < RowCells.Length; i++)
             {
-                await ToSignal(GetTree().CreateTimer(duration * percentDecay),
-                    "timeout");
-                RowCells[i].DisplayAccuracy(new Guess.Accuracy[] { accuracy[i] },
-                    0.15 * percentDecay);
+                await ToSignal(GetTree().CreateTimer(duration * percentDecay), "timeout");
+                RowCells[i].DisplayAccuracy(
+                    new Guess.Accuracy[] { accuracy[i] },
+                    0.15 * percentDecay
+                );
                 percentDecay -= i * (0.01 - (0.0005 * RowCells.Length));
                 GD.Print(percentDecay);
             }
@@ -135,7 +132,8 @@ public partial class Row : HBoxContainer, BaseWordleUI
             {
                 for (int i = 0; i < RowCells.Length; i++)
                 {
-                    if (!RowCells[i].HasFocus()) continue;
+                    if (!RowCells[i].HasFocus())
+                        continue;
 
                     if (i == 0)
                     {

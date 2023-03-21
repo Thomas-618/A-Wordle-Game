@@ -1,6 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://jkf0o8x40lgf"]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="FontFile" uid="uid://bn0r5u2fxfvxn" path="res://src/main/resources/LibreFranklinBold.ttf" id="1_gr0t0"]
+[ext_resource type="FontFile" uid="uid://bn0r5u2fxfvxn" path="res://src/main/resources/fonts/LibreFranklinBold.ttf" id="1_gr0t0"]
 [ext_resource type="Script" path="res://src/main/cs/LevelSelector.cs" id="1_qpcp6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x57pl"]

@@ -14,7 +14,7 @@ public partial class LevelSelector : VBoxContainer
 		Game game = (Game) GameScene.Instantiate();
 		game._Init(levelNum);
 		GetNode("..").AddChild(game);
-		GetNode("..").AddChild(ButtonScene.Instantiate());
+		// GetNode("..").AddChild(ButtonScene.Instantiate());
 		this.QueueFree();
 	}
 }

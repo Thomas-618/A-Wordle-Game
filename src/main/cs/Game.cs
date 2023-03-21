@@ -20,7 +20,7 @@ public partial class Game : Node
 	public override void _Ready()
 	{
 		this.Answer = SelectWord();
-		this.GameGrid = (Grid) GetNode("Grid");
+		this.GameGrid = (Grid) GetNode("Content/Grid");
 		this.PopupReel = (Reel) GetNode("Reel");
 		GameGrid.Init(this.WordLength, 6.0f);
 	}

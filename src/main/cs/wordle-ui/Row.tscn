@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bmt2kt01ge60b"]
+[gd_scene load_steps=3 format=3 uid="uid://bc4ga3ygli4yk"]
 
-[ext_resource type="Script" path="res://src/main/cs/gui/wordle-ui/Row.cs" id="1_3wis6"]
-[ext_resource type="Theme" uid="uid://b0iuiulr21ghm" path="res://src/main/cs/gui/wordle-ui/themes/WordleUI.tres" id="1_6hpfn"]
+[ext_resource type="Theme" path="res://src/main/cs/wordle-ui/themes/WordleUI.tres" id="1_a2ont"]
+[ext_resource type="Script" path="res://src/main/cs/wordle-ui/Row.cs" id="1_nbc17"]
 
 [node name="Row" type="HBoxContainer"]
 anchors_preset = 8
@@ -20,8 +20,8 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
 mouse_default_cursor_shape = 1
-theme = ExtResource("1_6hpfn")
+theme = ExtResource("1_a2ont")
 alignment = 1
-script = ExtResource("1_3wis6")
+script = ExtResource("1_nbc17")
 
 [connection signal="focus_entered" from="." to="." method="_OnFocusEntered"]
