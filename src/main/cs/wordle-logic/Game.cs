@@ -21,8 +21,18 @@ public partial class Game : Node
         this.Answer = SelectWord();
         this.GameGrid = (Grid)GetNode("Content/Grid");
         this.PopupReel = (Reel)GetNode("Margin/Reel");
-        GameGrid.Init(this.WordLength, 6.0f);
-		GameGrid.GrabFocus();
+        GameGrid.Init(this.WordLength, 6);
+        GameGrid.GrabFocus();
+    }
+
+    public void LoadGame()
+    {
+        return;
+    }
+
+    public void SaveGame()
+    {
+        return;
     }
 
     public string SelectWord()
@@ -53,13 +63,13 @@ public partial class Game : Node
                 GuessCount++;
                 break;
             case Guess.Result.Valid:
-				GameGrid.DisplayAccuracy(guess.GetGuessAccuracy());
-				GameGrid.DisplayResult(guess.GetGuessResult());
+                GameGrid.DisplayAccuracy(guess.GetGuessAccuracy());
+                GameGrid.DisplayResult(guess.GetGuessResult());
                 GuessCount++;
-				if (GuessCount >= 6)
-				{
-					PopupReel.createPopup(this.Answer, duration: 3.0f);
-				}
+                if (GuessCount >= 6)
+                {
+                    PopupReel.createPopup(this.Answer, duration: 3.0f);
+                }
                 break;
             case Guess.Result.Invalid:
                 GameGrid.DisplayResult(guess.GetGuessResult());

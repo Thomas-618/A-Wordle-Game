@@ -4,18 +4,31 @@ using WordleUI;
 
 public partial class Cell : LineEdit, IWordleUI
 {
-    private Vector2 CellDimensions;
+    private Vector2I CellDimensions;
+    private (string, Guess.Accuracy) CellState;
     private bool Used;
 
-    public void Init(float length, float height)
+    public void Init(int length, int height)
     {
-        this.CellDimensions = new Vector2(length, height);
+        this.CellDimensions = new Vector2I(length, height);
+        this.CellState = (string.Empty, Guess.Accuracy.None);
         this.Used = false;
     }
 
     public bool IsUsed()
     {
         return Used;
+    }
+
+    public void SaveGame((string, Guess.Accuracy) cellState)
+    {
+        Row parentRow = (Row)GetParent();
+        parentRow.SaveGame(cellState);
+    }
+
+    public void LoadGame(string cellState)
+    {
+        this.Text = cellState;
     }
 
     public void DisplayResult(Guess.Result result)
@@ -58,6 +71,7 @@ public partial class Cell : LineEdit, IWordleUI
         }
 
         this.Editable = false;
+        this.CellState = (CellState.Item1, accuracy[0]);
         switch (accuracy[0])
         {
             case Guess.Accuracy.Correct:
@@ -70,6 +84,7 @@ public partial class Cell : LineEdit, IWordleUI
                 FlipCell(Constants.IncorrectCell);
                 break;
         }
+        this.SaveGame(CellState);
     }
 
     public void _OnTextSubmitted(string _text)
@@ -95,6 +110,7 @@ public partial class Cell : LineEdit, IWordleUI
         }
 
         this.Text = text.ToUpper();
+        this.CellState = (this.Text, Guess.Accuracy.None);
         this.Used = true;
         if (!string.IsNullOrEmpty(this.Text))
         {
@@ -116,6 +132,7 @@ public partial class Cell : LineEdit, IWordleUI
         }
         Row parentRow = (Row)GetParent();
         parentRow._OnTextChanged(this.Text);
+        this.SaveGame(CellState);
         ShakeCell();
     }
 

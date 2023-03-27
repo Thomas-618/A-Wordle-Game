@@ -10,6 +10,7 @@ public partial class Guess : Node
 
     public enum Result
     {
+        None,
         Match,
         Valid,
         Invalid
@@ -17,6 +18,7 @@ public partial class Guess : Node
 
     public enum Accuracy
     {
+        None,
         Correct,
         SemiCorrect,
         Incorrect

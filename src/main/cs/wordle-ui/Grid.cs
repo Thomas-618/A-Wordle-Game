@@ -4,19 +4,22 @@ using WordleUI;
 
 public partial class Grid : GridContainer, IWordleUI
 {
-    private Vector2 GridDimensions;
+    private Vector2I GridDimensions;
     private Row[] GridRows;
+    public (string, Guess.Accuracy)[][] GridState;
     public bool Used;
 
-    public void Init(float length, float height)
+    public void Init(int length, int height)
     {
-        this.GridDimensions = new Vector2(length, height);
-        this.GridRows = new Row[(int)GridDimensions.Y];
+        this.GridDimensions = new Vector2I(length, height);
+        this.GridRows = new Row[GridDimensions.Y];
+        this.GridState = new (string, Guess.Accuracy)[GridDimensions.Y][];
         this.Used = false;
         for (int i = 0; i < GridRows.Length; i++)
         {
             GridRows[i] = (Row)Constants.RowScene.Instantiate();
-            GridRows[i].Init(GridDimensions.X, 1.0f);
+            GridRows[i].Init(GridDimensions.X, 1);
+            GridState[i] = GridRows[i].GetRowState();
             this.AddChild(GridRows[i]);
         }
     }
@@ -24,6 +27,27 @@ public partial class Grid : GridContainer, IWordleUI
     public bool IsUsed()
     {
         return Used;
+    }
+
+    public void SaveGame((string, Guess.Accuracy)[] rowState)
+    {
+        for (int i = 0; i < GridDimensions.Y; i++)
+        {
+            for (int j = 0; j < GridDimensions.X; j++)
+            {
+                GD.Print($"({i}, {j}): {GridState[i][j].Item1} | {GridState[i][j].Item2}");
+            }
+            GD.Print();
+        }
+    }
+
+    public void LoadGame(string gridState)
+    {
+        // GridState = gridState;
+        // for (int i = 0; i < GridState.Length; i++)
+        // {
+        //     GridRows[i].LoadGame(GridState);
+        // }
     }
 
     public void DisplayResult(Guess.Result result)

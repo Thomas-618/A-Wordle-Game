@@ -4,19 +4,21 @@ using WordleUI;
 
 public partial class Row : HBoxContainer, IWordleUI
 {
-    private Vector2 RowDimensions;
+    private Vector2I RowDimensions;
     private Cell[] RowCells;
+    private (string, Guess.Accuracy)[] RowState;
     private bool Used;
 
-    public void Init(float length, float height)
+    public void Init(int length, int height)
     {
-        this.RowDimensions = new Vector2(length, height);
-        this.RowCells = new Cell[(int)RowDimensions.X];
+        this.RowDimensions = new Vector2I(length, height);
+        this.RowCells = new Cell[RowDimensions.X];
+        this.RowState = new (string, Guess.Accuracy)[RowDimensions.X];
         this.Used = false;
         for (int i = 0; i < RowCells.Length; i++)
         {
             RowCells[i] = (Cell)Constants.CellScene.Instantiate();
-            RowCells[i].Init(1.0f, 1.0f);
+            RowCells[i].Init(1, 1);
             this.AddChild(RowCells[i]);
         }
     }
@@ -24,6 +26,72 @@ public partial class Row : HBoxContainer, IWordleUI
     public bool IsUsed()
     {
         return Used;
+    }
+
+    public (string, Guess.Accuracy)[] GetRowState()
+    {
+        return RowState;
+    }
+
+    public void SaveGame((string, Guess.Accuracy) cellState)
+    {
+        if (!this.IsUsed() && !string.IsNullOrEmpty(cellState.Item1))
+        {
+            for (int i = 0; i < RowDimensions.X; i++)
+            {
+                if (RowState[i].Item1 == null || RowState[i].Item1 == string.Empty)
+                {
+                    RowState[i] = cellState;
+                    break;
+                }
+            }
+        }
+        else if (!this.IsUsed() && string.IsNullOrEmpty(cellState.Item1))
+        {
+            bool found = false;
+            for (int i = 1; i < RowDimensions.X; i++)
+            {
+                if (RowState[i].Item1 == null || RowState[i].Item1 == string.Empty)
+                {
+                    RowState[i - 1].Item1 = string.Empty;
+                    found = true;
+                    break;
+                }
+            }
+            if (!found)
+            {
+                RowState[RowDimensions.X - 1].Item1 = string.Empty;
+            }
+        }
+        else if (this.IsUsed())
+        {
+            GD.Print("Saving Submit...");
+            for (int i = 0; i < RowDimensions.X; i++)
+            {
+                if (RowState[i].Item2 == Guess.Accuracy.None)
+                {
+                    RowState[i] = cellState;
+                    break;
+                }
+            }
+        }
+
+        // for (int i = 0; i < RowDimensions.X; i++)
+        // {
+        //     GD.Print($"{i}: {RowState[i].Item1} | {RowState[i].Item2}");
+        // }
+
+        Grid parentGrid = (Grid)GetParent();
+        parentGrid.SaveGame(RowState);
+    }
+
+    public void LoadGame(string rowState)
+    {
+        // RowState = rowState;
+        for (int i = 0; i < RowState.Length; i++)
+        {
+            RowCells[i].LoadGame(RowState[i].ToString());
+        }
     }
 
     public void DisplayResult(Guess.Result result)
@@ -71,8 +139,9 @@ public partial class Row : HBoxContainer, IWordleUI
         async void FlipRow()
         {
             double percentDecay = 1.0;
-            for (int i = 0; i < RowCells.Length; i++)
+            for (int i = 0; i < RowDimensions.X; i++)
             {
+                GD.Print($"Call #: {i}");
                 await ToSignal(GetTree().CreateTimer(duration * percentDecay), "timeout");
                 RowCells[i].DisplayAccuracy(
                     new Guess.Accuracy[] { accuracy[i] },
@@ -88,9 +157,9 @@ public partial class Row : HBoxContainer, IWordleUI
     public void _OnTextSubmitted(string text)
     {
         Grid parentGrid = (Grid)GetParent();
-        foreach (Cell cell in RowCells)
+        foreach ((string, Guess.Accuracy) cellState in RowState)
         {
-            text += cell.Text.ToLower();
+            text += cellState.Item1.ToLower();
         }
         parentGrid._OnTextSubmitted(text);
     }
