@@ -79,6 +79,10 @@ public partial class Cell : LineEdit, IWordleUI
         {
             parentRow._OnTextSubmitted(string.Empty);
         }
+        else
+        {
+            _OnTextChanged(string.Empty);
+        }
     }
 
     public void _OnTextChanged(string text)
@@ -117,9 +121,6 @@ public partial class Cell : LineEdit, IWordleUI
 
     public void _OnFocusEntered()
     {
-        if (!this.IsUsed())
-        {
-            this.GrabFocus();
-        }
+        this.GrabFocus();
     }
 }

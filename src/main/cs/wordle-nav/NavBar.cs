@@ -7,20 +7,28 @@ public partial class NavBar : VBoxContainer, IWordleNav
     public void _OnMenuPressed()
     {
         GD.Print("Menu");
+        Node menuDialog = Constants.MenuDialogScene.Instantiate();
+        GetOwner<Node>().AddChild(menuDialog);
     }
 
     public void _OnHelpPressed()
     {
         GD.Print("Help");
+        Node helpDialog = Constants.HelpDialogScene.Instantiate();
+        GetOwner<Node>().AddChild(helpDialog);
     }
 
     public void _OnStatsPressed()
     {
         GD.Print("Stats");
+        Node statsDialog = Constants.StatsDialogScene.Instantiate();
+        GetOwner<Node>().AddChild(statsDialog);
     }
 
-    public void _OnSettingsPressed()
+    public void _OnConfigPressed()
     {
-        GD.Print("Settings");
+        GD.Print("Config");
+        Node configDialog = Constants.ConfigDialogScene.Instantiate();
+        GetOwner<Node>().AddChild(configDialog);
     }
 }

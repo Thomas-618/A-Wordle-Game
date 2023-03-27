@@ -38,8 +38,6 @@ size_flags_horizontal = 3
 theme = ExtResource("1_jnngn")
 
 [node name="Menu" type="TextureButton" parent="Margin/NavItems/LeftAlign"]
-texture_filter = 1
-texture_repeat = 1
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -76,8 +74,6 @@ theme = ExtResource("1_jnngn")
 alignment = 2
 
 [node name="Help" type="TextureButton" parent="Margin/NavItems/RightAlign"]
-texture_filter = 1
-texture_repeat = 1
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -88,8 +84,6 @@ ignore_texture_size = true
 stretch_mode = 0
 
 [node name="Stats" type="TextureButton" parent="Margin/NavItems/RightAlign"]
-texture_filter = 1
-texture_repeat = 1
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -99,9 +93,7 @@ texture_normal = ExtResource("4_lqwif")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Settings" type="TextureButton" parent="Margin/NavItems/RightAlign"]
-texture_filter = 1
-texture_repeat = 1
+[node name="Config" type="TextureButton" parent="Margin/NavItems/RightAlign"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -118,4 +110,4 @@ theme = ExtResource("1_jnngn")
 [connection signal="pressed" from="Margin/NavItems/LeftAlign/Menu" to="." method="_OnMenuPressed"]
 [connection signal="pressed" from="Margin/NavItems/RightAlign/Help" to="." method="_OnHelpPressed"]
 [connection signal="pressed" from="Margin/NavItems/RightAlign/Stats" to="." method="_OnStatsPressed"]
-[connection signal="pressed" from="Margin/NavItems/RightAlign/Settings" to="." method="_OnSettingsPressed"]
+[connection signal="pressed" from="Margin/NavItems/RightAlign/Config" to="." method="_OnConfigPressed"]

@@ -28,11 +28,11 @@ public partial class Grid : GridContainer, IWordleUI
 
     public void DisplayResult(Guess.Result result)
     {
-        for (int i = 1; i < GridRows.Length; i++)
+        for (int i = 0; i < GridRows.Length; i++)
         {
             if (!GridRows[i].IsUsed())
             {
-                GridRows[i - 1].DisplayResult(result);
+                GridRows[i].DisplayResult(result);
                 return;
             }
         }
@@ -53,8 +53,7 @@ public partial class Grid : GridContainer, IWordleUI
 
     public void _OnTextSubmitted(string text)
     {
-        Game parentGame = ((Game)GetParent());
-        parentGame.MakeGuess(text);
+        GetOwner<Game>().MakeGuess(text);
         this._OnFocusEntered();
     }
 

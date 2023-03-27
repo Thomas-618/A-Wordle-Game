@@ -53,13 +53,14 @@ public partial class Row : HBoxContainer, IWordleUI
         switch (result)
         {
             case Guess.Result.Match:
+                this.Used = true;
                 BounceRow();
                 break;
             case Guess.Result.Valid:
-                throw new InvalidOperationException(
-                    "error: row attempted to display Guess.Result.Valid"
-                );
+                this.Used = true;
+                break;
             case Guess.Result.Invalid:
+                this.Used = false;
                 ShakeRow();
                 break;
         }
@@ -78,11 +79,9 @@ public partial class Row : HBoxContainer, IWordleUI
                     0.15 * percentDecay
                 );
                 percentDecay -= i * (0.01 - (0.0005 * RowCells.Length));
-                GD.Print(percentDecay);
             }
         }
 
-        this.Used = true;
         FlipRow();
     }
 
@@ -118,16 +117,6 @@ public partial class Row : HBoxContainer, IWordleUI
     {
         if (!this.IsUsed())
         {
-            if (@event.IsActionReleased("ui_accept"))
-            {
-                foreach (Cell cell in RowCells)
-                {
-                    if (!cell.IsUsed() && cell.HasFocus())
-                    {
-                        cell._OnTextChanged(string.Empty);
-                    }
-                }
-            }
             if (@event.IsActionReleased("ui_text_backspace"))
             {
                 for (int i = 0; i < RowCells.Length; i++)
