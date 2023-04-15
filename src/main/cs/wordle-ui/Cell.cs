@@ -26,11 +26,24 @@ public partial class Cell : LineEdit, IWordleUI
         parentRow.SaveGame(cellState);
     }
 
-    public void LoadGame(string text)
+    public void LoadGame(string save)
     {
-        this.CellState.Item1 = text;
+        this.CellState.Item1 = save;
         this.Text = CellState.Item1;
         this.Used = true;
+    }
+
+    public void RestartGame()
+    {
+        this.CellState = (string.Empty, Guess.Accuracy.None);
+        this.Text = CellState.Item1;
+        this.Editable = true;
+        this.Used = false;
+
+        this.AddThemeStyleboxOverride("normal", Constants.BlankCell);
+        this.AddThemeStyleboxOverride("focus", Constants.BlankCell);
+
+        SaveGame(this.CellState);
     }
 
     public void DisplayResult(Guess.Result result)
@@ -102,6 +115,7 @@ public partial class Cell : LineEdit, IWordleUI
         if (this.IsUsed())
         {
             parentRow._OnTextSubmitted(string.Empty);
+            this.ReleaseFocus();
         }
         else
         {

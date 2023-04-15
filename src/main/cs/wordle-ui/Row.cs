@@ -78,11 +78,20 @@ public partial class Row : HBoxContainer, IWordleUI
         parentGrid.SaveGame(RowState);
     }
 
-    public void LoadGame(string text)
+    public void LoadGame(string save)
     {
-        for (int i = 0; i < text.Length; i++)
+        for (int i = 0; i < save.Length; i++)
         {
-            RowCells[i].LoadGame(text[i].ToString());
+            RowCells[i].LoadGame(save[i].ToString());
+        }
+    }
+
+    public void RestartGame()
+    {
+        this.Used = false;
+        foreach (Cell cell in RowCells)
+        {
+            cell.RestartGame();
         }
     }
 

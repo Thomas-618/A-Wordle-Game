@@ -79,7 +79,11 @@ theme_override_fonts/font = ExtResource("5_m1evo")
 theme_override_font_sizes/font_size = 30
 text = "Guess the Wordle in as few tries."
 
-[node name="DialogBody" type="RichTextLabel" parent="Margin/Content"]
+[node name="Body" type="VBoxContainer" parent="Margin/Content"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DialogBody" type="RichTextLabel" parent="Margin/Content/Body"]
 layout_mode = 2
 mouse_filter = 2
 theme = ExtResource("1_pchm6")
@@ -87,31 +91,31 @@ text = "• Each guess must be a valid word.
 • The color of the cells will change to show how close your guess was to the word."
 fit_content = true
 
-[node name="ExampleSection" type="VBoxContainer" parent="Margin/Content"]
+[node name="ExampleSection" type="VBoxContainer" parent="Margin/Content/Body"]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="ExampleHeader" type="Label" parent="Margin/Content/ExampleSection"]
+[node name="ExampleHeader" type="Label" parent="Margin/Content/Body/ExampleSection"]
 layout_mode = 2
 theme = ExtResource("1_pchm6")
 theme_override_fonts/font = ExtResource("6_2nwys")
 text = "Examples
 "
 
-[node name="ExampleBody" type="VBoxContainer" parent="Margin/Content/ExampleSection"]
+[node name="ExampleBody" type="VBoxContainer" parent="Margin/Content/Body/ExampleSection"]
 layout_mode = 2
 theme_override_constants/separation = 30
 
-[node name="CorrectExample" type="VBoxContainer" parent="Margin/Content/ExampleSection/ExampleBody"]
+[node name="CorrectExample" type="VBoxContainer" parent="Margin/Content/Body/ExampleSection/ExampleBody"]
 layout_mode = 2
 theme = ExtResource("1_pchm6")
 theme_override_constants/separation = 12
 
-[node name="Diagram" type="HBoxContainer" parent="Margin/Content/ExampleSection/ExampleBody/CorrectExample"]
+[node name="Diagram" type="HBoxContainer" parent="Margin/Content/Body/ExampleSection/ExampleBody/CorrectExample"]
 layout_mode = 2
 theme = ExtResource("1_pchm6")
 
-[node name="Cell" parent="Margin/Content/ExampleSection/ExampleBody/CorrectExample/Diagram" instance=ExtResource("7_kmgso")]
+[node name="Cell" parent="Margin/Content/Body/ExampleSection/ExampleBody/CorrectExample/Diagram" instance=ExtResource("7_kmgso")]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
@@ -121,7 +125,7 @@ editable = false
 caret_blink = true
 caret_blink_interval = 0.5
 
-[node name="Cell2" parent="Margin/Content/ExampleSection/ExampleBody/CorrectExample/Diagram" instance=ExtResource("7_kmgso")]
+[node name="Cell2" parent="Margin/Content/Body/ExampleSection/ExampleBody/CorrectExample/Diagram" instance=ExtResource("7_kmgso")]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
@@ -130,7 +134,7 @@ editable = false
 caret_blink = true
 caret_blink_interval = 0.5
 
-[node name="Cell3" parent="Margin/Content/ExampleSection/ExampleBody/CorrectExample/Diagram" instance=ExtResource("7_kmgso")]
+[node name="Cell3" parent="Margin/Content/Body/ExampleSection/ExampleBody/CorrectExample/Diagram" instance=ExtResource("7_kmgso")]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
@@ -139,7 +143,7 @@ editable = false
 caret_blink = true
 caret_blink_interval = 0.5
 
-[node name="Cell4" parent="Margin/Content/ExampleSection/ExampleBody/CorrectExample/Diagram" instance=ExtResource("7_kmgso")]
+[node name="Cell4" parent="Margin/Content/Body/ExampleSection/ExampleBody/CorrectExample/Diagram" instance=ExtResource("7_kmgso")]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
@@ -148,7 +152,7 @@ editable = false
 caret_blink = true
 caret_blink_interval = 0.5
 
-[node name="Cell5" parent="Margin/Content/ExampleSection/ExampleBody/CorrectExample/Diagram" instance=ExtResource("7_kmgso")]
+[node name="Cell5" parent="Margin/Content/Body/ExampleSection/ExampleBody/CorrectExample/Diagram" instance=ExtResource("7_kmgso")]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
@@ -157,7 +161,7 @@ editable = false
 caret_blink = true
 caret_blink_interval = 0.5
 
-[node name="Caption" type="RichTextLabel" parent="Margin/Content/ExampleSection/ExampleBody/CorrectExample"]
+[node name="Caption" type="RichTextLabel" parent="Margin/Content/Body/ExampleSection/ExampleBody/CorrectExample"]
 layout_mode = 2
 theme = ExtResource("1_pchm6")
 bbcode_enabled = true
@@ -165,16 +169,16 @@ text = "[b]W[/b] is in the word and in the correct spot."
 fit_content = true
 scroll_active = false
 
-[node name="SemiCorrectExample" type="VBoxContainer" parent="Margin/Content/ExampleSection/ExampleBody"]
+[node name="SemiCorrectExample" type="VBoxContainer" parent="Margin/Content/Body/ExampleSection/ExampleBody"]
 layout_mode = 2
 theme = ExtResource("1_pchm6")
 theme_override_constants/separation = 12
 
-[node name="Diagram" type="HBoxContainer" parent="Margin/Content/ExampleSection/ExampleBody/SemiCorrectExample"]
+[node name="Diagram" type="HBoxContainer" parent="Margin/Content/Body/ExampleSection/ExampleBody/SemiCorrectExample"]
 layout_mode = 2
 theme = ExtResource("1_pchm6")
 
-[node name="Cell" parent="Margin/Content/ExampleSection/ExampleBody/SemiCorrectExample/Diagram" instance=ExtResource("7_kmgso")]
+[node name="Cell" parent="Margin/Content/Body/ExampleSection/ExampleBody/SemiCorrectExample/Diagram" instance=ExtResource("7_kmgso")]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
@@ -183,7 +187,7 @@ editable = false
 caret_blink = true
 caret_blink_interval = 0.5
 
-[node name="Cell2" parent="Margin/Content/ExampleSection/ExampleBody/SemiCorrectExample/Diagram" instance=ExtResource("7_kmgso")]
+[node name="Cell2" parent="Margin/Content/Body/ExampleSection/ExampleBody/SemiCorrectExample/Diagram" instance=ExtResource("7_kmgso")]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
@@ -193,7 +197,7 @@ editable = false
 caret_blink = true
 caret_blink_interval = 0.5
 
-[node name="Cell3" parent="Margin/Content/ExampleSection/ExampleBody/SemiCorrectExample/Diagram" instance=ExtResource("7_kmgso")]
+[node name="Cell3" parent="Margin/Content/Body/ExampleSection/ExampleBody/SemiCorrectExample/Diagram" instance=ExtResource("7_kmgso")]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
@@ -202,7 +206,7 @@ editable = false
 caret_blink = true
 caret_blink_interval = 0.5
 
-[node name="Cell4" parent="Margin/Content/ExampleSection/ExampleBody/SemiCorrectExample/Diagram" instance=ExtResource("7_kmgso")]
+[node name="Cell4" parent="Margin/Content/Body/ExampleSection/ExampleBody/SemiCorrectExample/Diagram" instance=ExtResource("7_kmgso")]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
@@ -211,7 +215,7 @@ editable = false
 caret_blink = true
 caret_blink_interval = 0.5
 
-[node name="Cell5" parent="Margin/Content/ExampleSection/ExampleBody/SemiCorrectExample/Diagram" instance=ExtResource("7_kmgso")]
+[node name="Cell5" parent="Margin/Content/Body/ExampleSection/ExampleBody/SemiCorrectExample/Diagram" instance=ExtResource("7_kmgso")]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
@@ -220,7 +224,7 @@ editable = false
 caret_blink = true
 caret_blink_interval = 0.5
 
-[node name="Caption" type="RichTextLabel" parent="Margin/Content/ExampleSection/ExampleBody/SemiCorrectExample"]
+[node name="Caption" type="RichTextLabel" parent="Margin/Content/Body/ExampleSection/ExampleBody/SemiCorrectExample"]
 layout_mode = 2
 theme = ExtResource("1_pchm6")
 bbcode_enabled = true
@@ -228,16 +232,16 @@ text = "[b]U[/b] is in the word but in the wrong spot."
 fit_content = true
 scroll_active = false
 
-[node name="IncorrectExample" type="VBoxContainer" parent="Margin/Content/ExampleSection/ExampleBody"]
+[node name="IncorrectExample" type="VBoxContainer" parent="Margin/Content/Body/ExampleSection/ExampleBody"]
 layout_mode = 2
 theme = ExtResource("1_pchm6")
 theme_override_constants/separation = 12
 
-[node name="Diagram" type="HBoxContainer" parent="Margin/Content/ExampleSection/ExampleBody/IncorrectExample"]
+[node name="Diagram" type="HBoxContainer" parent="Margin/Content/Body/ExampleSection/ExampleBody/IncorrectExample"]
 layout_mode = 2
 theme = ExtResource("1_pchm6")
 
-[node name="Cell" parent="Margin/Content/ExampleSection/ExampleBody/IncorrectExample/Diagram" instance=ExtResource("7_kmgso")]
+[node name="Cell" parent="Margin/Content/Body/ExampleSection/ExampleBody/IncorrectExample/Diagram" instance=ExtResource("7_kmgso")]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
@@ -246,7 +250,7 @@ editable = false
 caret_blink = true
 caret_blink_interval = 0.5
 
-[node name="Cell2" parent="Margin/Content/ExampleSection/ExampleBody/IncorrectExample/Diagram" instance=ExtResource("7_kmgso")]
+[node name="Cell2" parent="Margin/Content/Body/ExampleSection/ExampleBody/IncorrectExample/Diagram" instance=ExtResource("7_kmgso")]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
@@ -255,7 +259,7 @@ editable = false
 caret_blink = true
 caret_blink_interval = 0.5
 
-[node name="Cell3" parent="Margin/Content/ExampleSection/ExampleBody/IncorrectExample/Diagram" instance=ExtResource("7_kmgso")]
+[node name="Cell3" parent="Margin/Content/Body/ExampleSection/ExampleBody/IncorrectExample/Diagram" instance=ExtResource("7_kmgso")]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
@@ -264,7 +268,7 @@ editable = false
 caret_blink = true
 caret_blink_interval = 0.5
 
-[node name="Cell4" parent="Margin/Content/ExampleSection/ExampleBody/IncorrectExample/Diagram" instance=ExtResource("7_kmgso")]
+[node name="Cell4" parent="Margin/Content/Body/ExampleSection/ExampleBody/IncorrectExample/Diagram" instance=ExtResource("7_kmgso")]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
@@ -274,7 +278,7 @@ editable = false
 caret_blink = true
 caret_blink_interval = 0.5
 
-[node name="Cell5" parent="Margin/Content/ExampleSection/ExampleBody/IncorrectExample/Diagram" instance=ExtResource("7_kmgso")]
+[node name="Cell5" parent="Margin/Content/Body/ExampleSection/ExampleBody/IncorrectExample/Diagram" instance=ExtResource("7_kmgso")]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
@@ -283,7 +287,7 @@ editable = false
 caret_blink = true
 caret_blink_interval = 0.5
 
-[node name="Caption" type="RichTextLabel" parent="Margin/Content/ExampleSection/ExampleBody/IncorrectExample"]
+[node name="Caption" type="RichTextLabel" parent="Margin/Content/Body/ExampleSection/ExampleBody/IncorrectExample"]
 layout_mode = 2
 theme = ExtResource("1_pchm6")
 bbcode_enabled = true

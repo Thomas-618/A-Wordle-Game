@@ -1,8 +1,5 @@
 using Godot;
 using System;
-using System.IO;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
 using WordleUI;
 
 public partial class Grid : GridContainer, IWordleUI
@@ -25,7 +22,6 @@ public partial class Grid : GridContainer, IWordleUI
             GridState[i] = GridRows[i].GetRowState();
             this.AddChild(GridRows[i]);
         }
-        this.LoadGame();
     }
 
     public bool IsUsed()
@@ -43,24 +39,31 @@ public partial class Grid : GridContainer, IWordleUI
                 save.Append(GridState[i][j].Item1);
             }
         }
-        File.WriteAllText($"src/data/saves/{GridDimensions.X}.txt", save.ToString());
+        GetOwner<Game>().SaveGame(save.ToString());
     }
 
-    public void LoadGame(string text = "")
+    public void LoadGame(string save)
     {
-        string save = File.ReadAllText($"src/data/saves/{GridDimensions.X}.txt");
-
         string guess = string.Empty;
         for (int i = 0; i < save.Length; i++)
         {
             guess += save[i];
-            GridRows[i / GridDimensions.X].LoadGame(guess);
             if (guess.Length == GridDimensions.X)
             {
+                GridRows[i / GridDimensions.X].LoadGame(guess);
                 _OnTextSubmitted(guess.ToLower());
                 guess = string.Empty;
             }
         }
+    }
+
+    public void RestartGame()
+    {
+        foreach (Row row in GridRows)
+        {
+            row.RestartGame();
+        }
+        this._OnFocusEntered();
     }
 
     public void DisplayResult(Guess.Result result)
@@ -109,6 +112,6 @@ public partial class Grid : GridContainer, IWordleUI
                 return;
             }
         }
-        GridRows[GridRows.Length - 1]._OnFocusEntered();
+        // GridRows[GridRows.Length - 1]._OnFocusEntered();
     }
 }

@@ -14,7 +14,9 @@ namespace WordleUI
 
         public void SaveGame((string, Guess.Accuracy) state) { }
 
-        public void LoadGame(string text) { }
+        public void LoadGame(string save) { }
+
+        public void RestartGame() { }
 
         public void DisplayResult(Guess.Result result) { }
 
