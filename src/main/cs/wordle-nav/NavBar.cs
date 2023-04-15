@@ -7,8 +7,9 @@ public partial class NavBar : VBoxContainer, IWordleNav
     public void _OnMenuPressed()
     {
         GD.Print("Menu");
-        Node menuDialog = Constants.MenuDialogScene.Instantiate();
-        GetOwner<Node>().AddChild(menuDialog);
+        Node menuDialog = Constants.LevelSelectorScene.Instantiate();
+        GetTree().Root.GetNode("App").AddChild(menuDialog);
+        GetTree().Root.GetNode("App/WordleGame").QueueFree();
     }
 
     public void _OnHelpPressed()

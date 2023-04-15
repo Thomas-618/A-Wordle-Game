@@ -20,5 +20,8 @@ namespace WordleNav
         public static readonly PackedScene ConfigDialogScene = ResourceLoader.Load<PackedScene>(
             string.Format(scenePath, "ConfigDialog")
         );
+        public static readonly PackedScene LevelSelectorScene = ResourceLoader.Load<PackedScene>(
+            "res://src/main/scenes/LevelSelector.tscn"
+        );
     }
 }

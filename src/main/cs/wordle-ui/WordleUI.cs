@@ -12,9 +12,9 @@ namespace WordleUI
             return false;
         }
 
-        public void SaveGame() { }
+        public void SaveGame((string, Guess.Accuracy) state) { }
 
-        public void LoadGame() { }
+        public void LoadGame(string text) { }
 
         public void DisplayResult(Guess.Result result) { }
 

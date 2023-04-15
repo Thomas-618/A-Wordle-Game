@@ -26,9 +26,11 @@ public partial class Cell : LineEdit, IWordleUI
         parentRow.SaveGame(cellState);
     }
 
-    public void LoadGame(string cellState)
+    public void LoadGame(string text)
     {
-        this.Text = cellState;
+        this.CellState.Item1 = text;
+        this.Text = CellState.Item1;
+        this.Used = true;
     }
 
     public void DisplayResult(Guess.Result result)
@@ -89,6 +91,13 @@ public partial class Cell : LineEdit, IWordleUI
 
     public void _OnTextSubmitted(string _text)
     {
+        void ShakeCell()
+        {
+            Tween tween = GetTree().CreateTween();
+            tween.TweenProperty(this, "scale", new Vector2(1.1f, 1.1f), 0.075);
+            tween.TweenProperty(this, "scale", new Vector2(1.0f, 1.0f), 0.075);
+        }
+
         Row parentRow = (Row)GetParent();
         if (this.IsUsed())
         {
@@ -96,7 +105,7 @@ public partial class Cell : LineEdit, IWordleUI
         }
         else
         {
-            _OnTextChanged(string.Empty);
+            ShakeCell();
         }
     }
 
