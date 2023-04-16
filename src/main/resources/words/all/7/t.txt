@@ -2443,3 +2443,4 @@ tzitzis
 tzolkin
 tzontle
 tzotzil
+telecom

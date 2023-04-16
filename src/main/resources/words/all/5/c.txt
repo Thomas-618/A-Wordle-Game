@@ -1192,5 +1192,6 @@ cutis
 cutty
 cutup
 cuvee
+cyber
 czars
 czech

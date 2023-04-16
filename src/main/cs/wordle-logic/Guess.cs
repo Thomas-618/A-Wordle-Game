@@ -3,7 +3,7 @@ using System;
 
 public partial class Guess : Node
 {
-    private readonly Game GameGame;
+    private readonly string GuessAnswer;
     private readonly string GuessedWord;
     private readonly Result GuessResult;
     private readonly Accuracy[] GuessAccuracy;
@@ -24,20 +24,23 @@ public partial class Guess : Node
         Incorrect
     }
 
-    public Guess(Game game, string guess)
+    public Guess(string answer, string guess, bool safety = true)
     {
-        this.GameGame = game;
+        this.GuessAnswer = answer;
         this.GuessedWord = guess;
-        this.GuessResult = CheckGuessResult();
+        if (safety)
+        {
+            this.GuessResult = CheckGuessResult();
+        }
         this.GuessAccuracy = CheckGuessAccuracy();
     }
 
     private Result CheckGuessResult()
     {
-        if (GuessedWord == GameGame.GetAnswer())
+        if (GuessedWord == GuessAnswer)
             return Result.Match;
         string filePath =
-            $"res://src/main/resources/words/all/{GameGame.GetAnswer().Length}/{GuessedWord[0]}.txt";
+            $"res://src/main/resources/words/all/{GuessAnswer.Length}/{GuessedWord[0]}.txt";
         using (FileAccess words = FileAccess.Open(filePath, FileAccess.ModeFlags.Read))
         {
             while (words.GetPosition() < words.GetLength())
@@ -53,11 +56,11 @@ public partial class Guess : Node
 
     private Accuracy[] CheckGuessAccuracy()
     {
-        Accuracy[] answerAccuracy = new Accuracy[GameGame.GetAnswer().Length];
-        Accuracy[] guessAccuracy = new Accuracy[GameGame.GetAnswer().Length];
-        for (int i = 0; i < GameGame.GetAnswer().Length; i++)
+        Accuracy[] answerAccuracy = new Accuracy[GuessAnswer.Length];
+        Accuracy[] guessAccuracy = new Accuracy[GuessAnswer.Length];
+        for (int i = 0; i < GuessAnswer.Length; i++)
         {
-            if (GuessedWord[i] == GameGame.GetAnswer()[i])
+            if (GuessedWord[i] == GuessAnswer[i])
             {
                 answerAccuracy[i] = Accuracy.Correct;
                 guessAccuracy[i] = Accuracy.Correct;
@@ -68,14 +71,14 @@ public partial class Guess : Node
                 guessAccuracy[i] = Accuracy.Incorrect;
             }
         }
-        for (int i = 0; i < GameGame.GetAnswer().Length; i++)
+        for (int i = 0; i < GuessAnswer.Length; i++)
         {
             if (guessAccuracy[i] == Accuracy.Incorrect)
             {
                 for (
-                    int j = GameGame.GetAnswer().IndexOf(GuessedWord[i]);
+                    int j = GuessAnswer.IndexOf(GuessedWord[i]);
                     j > -1;
-                    j = GameGame.GetAnswer().IndexOf(GuessedWord[i], j + 1)
+                    j = GuessAnswer.IndexOf(GuessedWord[i], j + 1)
                 )
                 {
                     if (answerAccuracy[j] == Accuracy.Incorrect)

@@ -385,3 +385,5 @@ mutt
 muzo
 muzz
 mzee
+mega
+muze

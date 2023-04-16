@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://c4mudumjdcye1"]
+[gd_scene load_steps=6 format=3 uid="uid://c4mudumjdcye1"]
 
 [ext_resource type="Script" path="res://src/main/cs/wordle-logic/Game.cs" id="1_f6hw6"]
 [ext_resource type="PackedScene" uid="uid://dbdpnrr86st4g" path="res://src/main/cs/wordle-nav/NavBar.tscn" id="2_cp5q2"]
+[ext_resource type="PackedScene" uid="uid://c53qvfub5nnfd" path="res://src/main/cs/wordle-ai/WordleAI.tscn" id="2_q0ig2"]
 [ext_resource type="PackedScene" uid="uid://bo1gyhfau31ae" path="res://src/main/cs/wordle-ui/Grid.tscn" id="2_tbpjr"]
 [ext_resource type="PackedScene" path="res://src/main/scenes/gui/Reel.tscn" id="3_7ajsu"]
 
@@ -13,6 +14,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_f6hw6")
+
+[node name="WordleAI" parent="." instance=ExtResource("2_q0ig2")]
+layout_mode = 1
 
 [node name="Content" type="VBoxContainer" parent="."]
 layout_mode = 1

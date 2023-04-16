@@ -10,6 +10,7 @@ public partial class Game : Node
     int GuessCount;
 
     Grid GameGrid;
+    WordleAI GameAI;
     Reel PopupReel;
 
     public void _Init(int wordLength)
@@ -23,8 +24,10 @@ public partial class Game : Node
         this.Win = false;
         this.GameGrid = (Grid)GetNode("Content/Grid");
         this.PopupReel = (Reel)GetNode("Margin/Reel");
+        this.GameAI = (WordleAI)GetNode("WordleAI");
         GameGrid.Init(this.WordLength, 6);
         GameGrid.GrabFocus();
+        GameAI.Init(this.WordLength);
         LoadGame();
     }
 
@@ -108,8 +111,14 @@ public partial class Game : Node
             AddChild(ResourceLoader.Load<PackedScene>("res://src/main/cs/wordle-dialog/GameDialog.tscn").Instantiate());
 
         }
-
-        Guess guess = new Guess(this, word);
+        // for (int i  = 0; i < GameGrid.GridState.Length; i++)
+        // {
+        //     for (int j = 0; j < GameGrid.GridState[i].Length; j++)
+        //     {
+        //         GD.Print(GameGrid.GridState[i][j]);
+        //     }
+        // }
+        Guess guess = new Guess(Answer, word);
         switch (guess.GetGuessResult())
         {
             case Guess.Result.Match:

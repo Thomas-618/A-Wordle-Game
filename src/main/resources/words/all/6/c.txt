@@ -2531,3 +2531,4 @@ cwierc
 cwrite
 czaric
 czechs
+config
