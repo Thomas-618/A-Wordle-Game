@@ -25,8 +25,8 @@ public partial class MultiPlayerConfigData : Control
 
 	public void _OnMutliPlayerPressed()
 	{
-		Node menuDialog = Constants.LevelSelectorScene.Instantiate();
-        GetTree().Root.GetNode("App").AddChild(menuDialog);
-        GetTree().Root.GetNode("App/WordleGame").QueueFree();
+		// Node menuDialog = Constants.LevelSelectorScene.Instantiate();
+        // GetTree().Root.GetNode("App").AddChild(menuDialog);
+        // GetTree().Root.GetNode("App/WordleGame").QueueFree();
 	}
 }

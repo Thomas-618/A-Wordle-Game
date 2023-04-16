@@ -127,7 +127,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
 theme = ExtResource("1_nrax8")
-text = "Option 1"
+text = "Multiplayer Mode! Can You Beat the Computer?"
 flat = true
 
 [node name="Item2" type="CheckButton" parent="Margin/Content/Body"]
@@ -194,3 +194,4 @@ fit_content = true
 [connection signal="pressed" from="Margin/Content/Body/Margin/Buttons/Restart" to="ConfigData" method="_OnRestartPressed"]
 [connection signal="pressed" from="Margin/Content/Body/Margin/Buttons/Reset" to="ConfigData" method="_OnResetPressed"]
 [connection signal="pressed" from="Margin/Content/Body/Margin/Buttons/Quit" to="ConfigData" method="_OnQuitPressed"]
+[connection signal="pressed" from="Margin/Content/Body/Item1" to="ConfigData" method="_on_item_1_pressed"]
