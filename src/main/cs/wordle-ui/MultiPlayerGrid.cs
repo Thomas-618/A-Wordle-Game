@@ -1,23 +1,23 @@
 using Godot;
 using System;
-using WordleUI;
+using MultiPlayerWordleUI;
 
-public partial class Grid : GridContainer, IWordleUI
+public partial class MultiPlayerGrid : GridContainer, IWordleUI
 {
     private Vector2I GridDimensions;
-    public Row[] GridRows;
+    public MultiPlayerRow[] GridRows;
     public (string, Guess.Accuracy)[][] GridState;
     public bool Used;
 
     public void Init(int length, int height)
     {
         this.GridDimensions = new Vector2I(length, height);
-        this.GridRows = new Row[GridDimensions.Y];
+        this.GridRows = new MultiPlayerRow[GridDimensions.Y];
         this.GridState = new (string, Guess.Accuracy)[GridDimensions.Y][];
         this.Used = false;
         for (int i = 0; i < GridRows.Length; i++)
         {
-            GridRows[i] = (Row)Constants.RowScene.Instantiate();
+            GridRows[i] = (MultiPlayerRow)Constants.RowScene.Instantiate();
             GridRows[i].Init(GridDimensions.X, 1);
             GridState[i] = GridRows[i].GetRowState();
             this.AddChild(GridRows[i]);
@@ -39,7 +39,7 @@ public partial class Grid : GridContainer, IWordleUI
                 save.Append(GridState[i][j].Item1);
             }
         }
-        GetOwner<Game>().SaveGame(save.ToString());
+        GetOwner<MultiPlayerGame>().SaveGame(save.ToString());
     }
 
     public void LoadGame(string save)
@@ -59,7 +59,7 @@ public partial class Grid : GridContainer, IWordleUI
 
     public void RestartGame()
     {
-        foreach (Row row in GridRows)
+        foreach (MultiPlayerRow row in GridRows)
         {
             row.RestartGame();
         }
@@ -93,7 +93,7 @@ public partial class Grid : GridContainer, IWordleUI
 
     public void _OnTextSubmitted(string text)
     {
-        GetOwner<Game>().MakeGuess(text);
+        GetOwner<MultiPlayerGame>().MakeGuess(text);
         this._OnFocusEntered();
     }
 
@@ -104,7 +104,7 @@ public partial class Grid : GridContainer, IWordleUI
 
     public void _OnFocusEntered()
     {
-        foreach (Row row in GridRows)
+        foreach (MultiPlayerRow row in GridRows)
         {
             if (!row.IsUsed())
             {

@@ -1,23 +1,23 @@
 using Godot;
 using System;
-using WordleUI;
+using MultiPlayerWordleUI;
 
-public partial class Row : HBoxContainer, IWordleUI
+public partial class MultiPlayerRow : HBoxContainer, IWordleUI
 {
     private Vector2I RowDimensions;
-    public Cell[] RowCells;
+    public MultiPlayerCell[] RowCells;
     private (string, Guess.Accuracy)[] RowState;
-    private bool Used;
+    public bool Used;
 
     public void Init(int length, int height)
     {
         this.RowDimensions = new Vector2I(length, height);
-        this.RowCells = new Cell[RowDimensions.X];
+        this.RowCells = new MultiPlayerCell[RowDimensions.X];
         this.RowState = new (string, Guess.Accuracy)[RowDimensions.X];
         this.Used = false;
         for (int i = 0; i < RowCells.Length; i++)
         {
-            RowCells[i] = (Cell)Constants.CellScene.Instantiate();
+            RowCells[i] = (MultiPlayerCell)Constants.CellScene.Instantiate();
             RowCells[i].Init(1, 1);
             this.AddChild(RowCells[i]);
         }
@@ -74,7 +74,7 @@ public partial class Row : HBoxContainer, IWordleUI
                 }
             }
         }
-        Grid parentGrid = (Grid)GetParent();
+        MultiPlayerGrid parentGrid = (MultiPlayerGrid)GetParent();
         parentGrid.SaveGame(RowState);
     }
 
@@ -89,7 +89,7 @@ public partial class Row : HBoxContainer, IWordleUI
     public void RestartGame()
     {
         this.Used = false;
-        foreach (Cell cell in RowCells)
+        foreach (MultiPlayerCell cell in RowCells)
         {
             cell.RestartGame();
         }
@@ -100,7 +100,7 @@ public partial class Row : HBoxContainer, IWordleUI
         async void BounceRow()
         {
             await ToSignal(GetTree().CreateTimer(1.0f), "timeout");
-            foreach (Cell cell in RowCells)
+            foreach (MultiPlayerCell cell in RowCells)
             {
                 await ToSignal(GetTree().CreateTimer(0.15f), "timeout");
                 cell.DisplayResult(result);
@@ -156,7 +156,7 @@ public partial class Row : HBoxContainer, IWordleUI
 
     public void _OnTextSubmitted(string text)
     {
-        Grid parentGrid = (Grid)GetParent();
+        MultiPlayerGrid parentGrid = (MultiPlayerGrid)GetParent();
         foreach ((string, Guess.Accuracy) cellState in RowState)
         {
             text += cellState.Item1.ToLower();
@@ -171,7 +171,7 @@ public partial class Row : HBoxContainer, IWordleUI
 
     public void _OnFocusEntered()
     {
-        foreach (Cell cell in RowCells)
+        foreach (MultiPlayerCell cell in RowCells)
         {
             if (!cell.IsUsed())
             {

@@ -83,6 +83,7 @@ public partial class WordleAI : Control
                 bestGuess = word;
             }
         }
+        GD.Print(bestGuess);
         return bestGuess;
     }
 

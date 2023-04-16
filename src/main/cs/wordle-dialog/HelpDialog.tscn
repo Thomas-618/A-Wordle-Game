@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c5h4xjhw14ti5"]
+[gd_scene load_steps=14 format=3]
 
 [ext_resource type="Theme" uid="uid://qxhbpqwnda5" path="res://src/main/cs/wordle-dialog/themes/WordleDialog.tres" id="1_pchm6"]
 [ext_resource type="Script" path="res://src/main/cs/wordle-dialog/Dialog.cs" id="2_jj5gd"]
@@ -6,7 +6,7 @@
 [ext_resource type="FontFile" uid="uid://dr1j2r8o1j6yl" path="res://src/main/resources/fonts/KarnakPro-CondensedBlack.ttf" id="4_v73yn"]
 [ext_resource type="FontFile" uid="uid://qjacn1t33u4d" path="res://src/main/resources/fonts/KarnakPro-Book.ttf" id="5_m1evo"]
 [ext_resource type="FontFile" uid="uid://bn0r5u2fxfvxn" path="res://src/main/resources/fonts/LibreFranklinBold.ttf" id="6_2nwys"]
-[ext_resource type="PackedScene" uid="uid://c835eri6lln5a" path="res://src/main/cs/wordle-ui/Cell.tscn" id="7_kmgso"]
+[ext_resource type="PackedScene" path="res://src/main/cs/wordle-ui/Cell.tscn" id="7_kmgso"]
 [ext_resource type="StyleBox" uid="uid://cd1x0kcnl8gqv" path="res://src/main/cs/wordle-ui/styles/CorrectCell.tres" id="8_ybbca"]
 [ext_resource type="StyleBox" uid="uid://dc4yg6fg6f23v" path="res://src/main/cs/wordle-ui/styles/SemiCorrectCell.tres" id="9_musu8"]
 [ext_resource type="StyleBox" uid="uid://bm8hqi65m1khf" path="res://src/main/cs/wordle-ui/styles/IncorrectCell.tres" id="10_nnm3t"]

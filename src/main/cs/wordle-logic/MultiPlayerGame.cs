@@ -1,15 +1,19 @@
 using Godot;
 using System;
 
-public partial class Game : Node
+public partial class MultiPlayerGame : Game
 {
     string Answer;
     bool Win;
+    bool AIWin;
+
+    string[] AIPreviousGuesses = new string[6];
 
     int WordLength;
     int GuessCount;
 
-    Grid GameGrid;
+    MultiPlayerGrid GameGrid;
+    MultiPlayerGrid AIGrid;
     WordleAI GameAI;
     Reel PopupReel;
 
@@ -22,12 +26,22 @@ public partial class Game : Node
     {
         this.Answer = SelectWord();
         this.Win = false;
-        this.GameGrid = (Grid)GetNode("Content/Grid");
+        this.AIWin = false;
+        this.GameGrid = (MultiPlayerGrid)GetNode("Content/Scroll/Container/Panel1/Grid");
+        this.AIGrid = (MultiPlayerGrid)GetNode("Content/Scroll/Container/Panel2/AI");
         this.PopupReel = (Reel)GetNode("Margin/Reel");
         this.GameAI = (WordleAI)GetNode("WordleAI");
         GameGrid.Init(this.WordLength, 6);
+        AIGrid.Init(this.WordLength, 6);
         GameGrid.GrabFocus();
         GameAI.Init(this.WordLength);
+        for (int i = 0; i < 6; i++)
+        {
+            for (int j = 0; j < WordLength; j++)
+            {
+                AIGrid.GridRows[i].RowCells[j].Editable = false;
+            }
+        }
         LoadGame();
     }
 
@@ -38,7 +52,8 @@ public partial class Game : Node
 
     public void SaveGame(string save)
     {
-        if (Win || (GuessCount >= 6))
+        
+        if (AIWin || Win || (GuessCount >= 6))
         {
             System.IO.File.WriteAllText($"src/data/saves/{WordLength}.txt", string.Empty);
             return;
@@ -71,8 +86,23 @@ public partial class Game : Node
         {
             PopupReel.createPopup("Play Again!", duration: 3.0f);
         }
+        AIWin = false;
         Win = false;
         GuessCount = 0;
+        for (int i = 0; i < 6; i++)
+        {
+            for (int j = 0; j < WordLength; j++)
+            {
+                MultiPlayerCell cell = AIGrid.GridRows[i].RowCells[j];
+                cell.Text = string.Empty;
+                cell.Editable = true;
+                AIGrid.GridRows[i].Used = false;
+                cell.Used = false;
+                cell.AddThemeStyleboxOverride("read-only", MultiPlayerWordleUI.Constants.BlankCell);
+                cell.AddThemeStyleboxOverride("normal", MultiPlayerWordleUI.Constants.BlankCell);
+                cell.AddThemeStyleboxOverride("focus", MultiPlayerWordleUI.Constants.BlankCell);
+            }
+        }
         SaveGame(string.Empty);
         GameGrid.RestartGame();
     }
@@ -108,16 +138,9 @@ public partial class Game : Node
                 await ToSignal(GetTree().CreateTimer(3.0f), "timeout");
 
             }
-            AddChild(ResourceLoader.Load<PackedScene>("res://src/main/cs/wordle-dialog/GameDialog.tscn").Instantiate());
+            AddChild(ResourceLoader.Load<PackedScene>("res://src/main/cs/wordle-dialog/MultiPlayerGameDialog.tscn").Instantiate());
 
         }
-        // for (int i  = 0; i < GameGrid.GridState.Length; i++)
-        // {
-        //     for (int j = 0; j < GameGrid.GridState[i].Length; j++)
-        //     {
-        //         GD.Print(GameGrid.GridState[i][j]);
-        //     }
-        // }
         Guess guess = new Guess(Answer, word);
         switch (guess.GetGuessResult())
         {
@@ -133,6 +156,42 @@ public partial class Game : Node
                 GameGrid.DisplayAccuracy(guess.GetGuessAccuracy());
                 GameGrid.DisplayResult(guess.GetGuessResult());
                 GuessCount++;
+                
+                string aiGuessString;
+                if (GuessCount == 1)
+                {
+                    aiGuessString = word;
+                }
+                else
+                {
+                    for (int i = 0; i < GuessCount - 1; i++)
+                    {
+                        for (int j = 0; j < WordLength; j++)
+                        {
+                            AIGrid.GridState[i][j] = (AIPreviousGuesses[i][j].ToString(), AIGrid.GridState[i][j].Item2);
+                            GD.Print(AIGrid.GridState[i][j]);
+                        }
+                    }
+                    aiGuessString = GameAI.GetBestGuess(AIGrid.GridState);
+                }
+                AIPreviousGuesses[GuessCount - 1] = aiGuessString;
+                Guess aiGuess = new Guess(Answer, aiGuessString);
+                switch (aiGuess.GetGuessResult())
+                {
+                    case Guess.Result.Match:
+                        AIGrid.DisplayAccuracy(aiGuess.GetGuessAccuracy());
+                        AIGrid.DisplayResult(aiGuess.GetGuessResult());
+                        AIWin = true;
+                        SetStats();
+                        DisplayGameOver(Win);
+                        SaveGame(string.Empty);
+                        break;
+                    case Guess.Result.Valid:
+                        AIGrid.DisplayAccuracy(aiGuess.GetGuessAccuracy());
+                        AIGrid.DisplayResult(aiGuess.GetGuessResult());
+                        break;
+                }
+
                 if (GuessCount >= 6)
                 {
                     Win = false;
@@ -168,7 +227,7 @@ public partial class Game : Node
 
     public string[] GetStats()
     {
-            return System.IO.File.ReadAllLines($"src/data/stats/{WordLength}.txt");
+        return System.IO.File.ReadAllLines($"src/data/stats/{WordLength}.txt");
     }
 
     public void ResetStats()
